@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Etch-a-Sketch</h1>
+    <div class="wrapper">
+        <form class="options">
+            <div class="color-selector-container">
+                <input type="color" class="color-option" id="color-selector">
+            </div>
+            <button type="button" class="option" id="color">Color Mode</button>
+            <button type="button" class="option" id="rainbow">Rainbow Mode</button>
+            <button type="button" class="option" id="eraser">Eraser</button>
+            <button type="button" class="option" id="clear">Clear</button>
+            <button type="button" class="option" id="darken">Darken Mode</button>
+            <button type="button" class="option" id="lighten">Lighten Mode</button>
+            <label for="grid-size" id="size-label"></label>
+            <input type="range" value="16" class="size-option" id="size-selector" max="64" min="1" step="1"></button>
+        </form>
+        <div class="grid-container">
+            <div class="grid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
