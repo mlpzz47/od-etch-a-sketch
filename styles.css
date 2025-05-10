@@ -35,6 +35,10 @@ h1 {
     gap: 15px;
 }
 
+.option,.size-option,.color-option {
+    cursor: pointer;
+}
+
 .option {
     width: 150px;
     margin: 0 30px;
@@ -72,7 +76,6 @@ h1 {
 
 .grid-container {
     flex-grow: 1;
-    background-color: #000;
     margin-right: 30px;
 }
 
@@ -80,5 +83,8 @@ h1 {
     width: 500px;
     aspect-ratio: 1 /1;
     display: grid;
+}
+
+.cell {
     background-color: #fff;
 }
