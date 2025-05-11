@@ -20,7 +20,7 @@ const getRandomColor = ()=>{
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
-    return `rgb(${r} ${g} ${b})`
+    return `rgb(${r}, ${g}, ${b})`
 }
 
 // eraser and clear mode
@@ -107,7 +107,7 @@ clear.addEventListener("click", (e)=>{
     let cells = document.querySelectorAll(".cell");
     cells.forEach((cell)=>{
         cell.style.backgroundColor = initialColor;
-        cell.style.filter = `brightness(1)`
+        cell.style.filter = "brightness(1)";
     })
 })
 
@@ -159,6 +159,19 @@ gridSize.addEventListener("input", ()=>{
     } while (totalCells < grid.children.length){
         deleteCells();
     }
+
+    let cells = document.querySelectorAll(".cell");
+    cells.forEach((cell)=>{
+        cell.style.backgroundColor = initialColor;
+        cell.style.filter = "brightness(1)";
+        if (showGrid.classList.contains("pressed")) {
+        cells.forEach((cell)=>{
+        cell.style.border = "none";
+        })
+        showGrid.classList.remove("pressed");
+        }
+    })
+
     grid.style.gridTemplateColumns = `repeat(${rowsColumnsNumber}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${rowsColumnsNumber}, 1fr)`;
     gridInfo.innerHTML = `Grid Size: <b>${rowsColumnsNumber} x ${rowsColumnsNumber}</b>`;
