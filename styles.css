@@ -35,7 +35,7 @@ h1 {
     gap: 15px;
 }
 
-.option,.size-option,.color-option {
+.option,.color-option {
     cursor: pointer;
 }
 
@@ -74,13 +74,19 @@ h1 {
     top: -20px;
 }
 
+#clear {
+    background-color: #a33;
+    color: var(--bg-color);
+
+}
+
 .grid-container {
     flex-grow: 1;
-    margin-right: 30px;
 }
 
 .grid {
     width: 500px;
+    margin: auto;
     aspect-ratio: 1 /1;
     display: grid;
 }
