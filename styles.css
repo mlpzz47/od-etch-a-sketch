@@ -74,6 +74,14 @@ h1 {
     top: -20px;
 }
 
+.size-option-container {
+    text-align: center;
+}
+
+.size-option {
+    accent-color: var(--main-color);
+}
+
 #clear {
     background-color: #a33;
     color: var(--bg-color);
