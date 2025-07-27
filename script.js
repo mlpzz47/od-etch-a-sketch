@@ -30,17 +30,27 @@ let initialColor = `#fff`
 // darken mode
 
 
-
 const darkenColor = (cell)=>{
     let brightness = parseFloat(cell.style.filter.replace("brightness(","").replace(")","")) || 1;
-    if (brightness > 0) {
+    if (brightness > 0.1) {
         brightness -= 0.1;
-    } else {
-        brightness = 0
+    } else if (brightness == 0) {
+        brightness = 0;
     }
     return brightness;
 }
 
+// lighten mode
+
+const lightenColor = (cell)=>{
+    let opacity = cell.style.opacity || 1;
+    if (opacity > 0.1) {
+        opacity -= 0.1;
+    } else if (opacity == 0) {
+        opacity = 0;
+    }
+    return opacity;
+}
 
 // cell painting events
 
@@ -51,13 +61,24 @@ const paintCell = (e)=>{
     const cell = e.target;
     if (colorMode.classList.contains("pressed")) {
         cell.style.backgroundColor = colorChosen;
+        cell.style.filter = `brightness(1)`;
+        cell.style.opacity = "1";
     } else if (rainbowMode.classList.contains("pressed")) {
         cell.style.backgroundColor = getRandomColor();
+        cell.style.filter = `brightness(1)`;
+        cell.style.opacity = "1";
     } else if (eraser.classList.contains("pressed")) {
         cell.style.backgroundColor = initialColor;
+        cell.style.filter = `brightness(1)`;
+        cell.style.opacity = "1";
     } else if (darkenMode.classList.contains("pressed")) {
         let darkened = darkenColor(cell);
         cell.style.filter = `brightness(${darkened})`;
+        cell.style.opacity = "1";
+    } else if (lightenMode.classList.contains("pressed")) {
+        let lightened = lightenColor(cell);
+        cell.style.opacity = `${lightened}`;
+        cell.style.filter = `brightness(1)`;
     }
 }
 
@@ -89,11 +110,11 @@ opt.forEach((button)=>{
                 otherButton.classList.remove("pressed");
             }
         })
-        if (colorMode.classList.contains("pressed") || rainbowMode.classList.contains("pressed") || eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed")) {
+        if (colorMode.classList.contains("pressed") || rainbowMode.classList.contains("pressed") || eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed") || lightenMode.classList.contains("pressed")) {
             cells.forEach((cell)=>{
                 paintingEvents(cell);
             })
-        } else if (!colorMode.classList.contains("pressed") || !rainbowMode.classList.contains("pressed") || !eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed")) {
+        } else if (!colorMode.classList.contains("pressed") || !rainbowMode.classList.contains("pressed") || !eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed") || lightenMode.classList.contains("pressed")) {
             cells.forEach((cell)=>{
                 cell.removeEventListener("mousedown", startPainting);
                 cell.removeEventListener("mouseup", stopPainting);
@@ -108,6 +129,7 @@ clear.addEventListener("click", (e)=>{
     cells.forEach((cell)=>{
         cell.style.backgroundColor = initialColor;
         cell.style.filter = "brightness(1)";
+        cell.style.opacity = "1";
     })
 })
 
@@ -125,7 +147,9 @@ showGrid.addEventListener("click", (e)=>{
     }
 })
 
+
 // changing the grid size
+
 const grid = document.querySelector(".grid");
 const gridSize = document.getElementById("size-selector")
 const gridInfo = document.getElementById("size-label");

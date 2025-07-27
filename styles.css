@@ -8,8 +8,8 @@ body,div,h1,button,form,input {
 }
 
 body {
-    --main-color: #014979;
-    --bg-color: #f7f7f7;
+    --main-color: #fca311;
+    --bg-color: #14213d;
     background-color: var(--bg-color);
     font-family: sans-serif;
 }
@@ -17,7 +17,7 @@ body {
 h1 {
     margin: 50px auto;
     width: fit-content;
-    color: #001440;
+    color: var(--main-color);
     font-size: 2.5rem;
 }
 
@@ -25,6 +25,10 @@ h1 {
     display: flex;
     margin: 40px auto;
     max-width: 1080px;;
+}
+
+.grid {
+    background-color: #fff;
 }
 
 .options {
@@ -62,6 +66,8 @@ h1 {
     margin-bottom: 10px;
     overflow: hidden;
     position: relative;
+    outline: 2px solid #fff;
+    outline-offset: 5px;
 }
 
 .color-option {
@@ -75,17 +81,22 @@ h1 {
 }
 
 .size-option-container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .size-option {
     accent-color: var(--main-color);
 }
 
+#size-label {
+    color: #fff;
+}
+
 #clear {
     background-color: #a33;
-    color: var(--bg-color);
-
+    color: #fff;
 }
 
 .grid-container {
