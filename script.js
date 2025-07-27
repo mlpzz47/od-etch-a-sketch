@@ -4,17 +4,21 @@ const colorMode = document.getElementById("color");
 const rainbowMode = document.getElementById("rainbow");
 const eraser = document.getElementById("eraser");
 const clear = document.getElementById("clear");
-const darkenMode = document.getElementById("darken");
-const lightenMode = document.getElementById("lighten");
+// const darkenMode = document.getElementById("darken");
+// const lightenMode = document.getElementById("lighten");
 const showGrid = document.getElementById("show-grid");
 const cells = document.querySelectorAll(".cell")
 
+
 // color mode
+
+
 
 let colorChosen = colorSelector.value;
 
 
 // rainbow mode
+
 
 const getRandomColor = ()=>{
     const r = Math.floor(Math.random() * 256);
@@ -23,36 +27,43 @@ const getRandomColor = ()=>{
     return `rgb(${r}, ${g}, ${b})`
 }
 
+
 // eraser and clear mode
 
+
 let initialColor = `#fff`
+
 
 // darken mode
 
 
-const darkenColor = (cell)=>{
-    let brightness = parseFloat(cell.style.filter.replace("brightness(","").replace(")","")) || 1;
-    if (brightness > 0.1) {
-        brightness -= 0.1;
-    } else if (brightness == 0) {
-        brightness = 0;
-    }
-    return brightness;
-}
+// const darkenColor = (cell)=>{
+//     let brightness = parseFloat(cell.style.filter.replace("brightness(","").replace(")","")) || 1;
+//     if (brightness > 0.1) {
+//         brightness -= 0.1;
+//     } else if (brightness == 0) {
+//         brightness = 0;
+//     }
+//     return brightness;
+// }
 
-// lighten mode
+// // lighten mode
 
-const lightenColor = (cell)=>{
-    let opacity = cell.style.opacity || 1;
-    if (opacity > 0.1) {
-        opacity -= 0.1;
-    } else if (opacity == 0) {
-        opacity = 0;
-    }
-    return opacity;
-}
+// const lightenColor = (cell)=>{
+//     let opacity = cell.style.opacity || 1;
+//     if (opacity > 0.1) {
+//         opacity -= 0.1;
+//     } else if (opacity == 0) {
+//         opacity = 0;
+//     }
+//     return opacity;
+// }
+
+
 
 // cell painting events
+
+
 
 let painting = false;
 
@@ -61,25 +72,26 @@ const paintCell = (e)=>{
     const cell = e.target;
     if (colorMode.classList.contains("pressed")) {
         cell.style.backgroundColor = colorChosen;
-        cell.style.filter = `brightness(1)`;
-        cell.style.opacity = "1";
+        // cell.style.filter = `brightness(1)`;
+        // cell.style.opacity = "1";
     } else if (rainbowMode.classList.contains("pressed")) {
         cell.style.backgroundColor = getRandomColor();
-        cell.style.filter = `brightness(1)`;
-        cell.style.opacity = "1";
+        // cell.style.filter = `brightness(1)`;
+        // cell.style.opacity = "1";
     } else if (eraser.classList.contains("pressed")) {
         cell.style.backgroundColor = initialColor;
-        cell.style.filter = `brightness(1)`;
-        cell.style.opacity = "1";
-    } else if (darkenMode.classList.contains("pressed")) {
-        let darkened = darkenColor(cell);
-        cell.style.filter = `brightness(${darkened})`;
-        cell.style.opacity = "1";
-    } else if (lightenMode.classList.contains("pressed")) {
-        let lightened = lightenColor(cell);
-        cell.style.opacity = `${lightened}`;
-        cell.style.filter = `brightness(1)`;
-    }
+        // cell.style.filter = `brightness(1)`;
+        // cell.style.opacity = "1";
+    } 
+    // else if (darkenMode.classList.contains("pressed")) {
+    //     let darkened = darkenColor(cell);
+    //     cell.style.filter = `brightness(${darkened})`;
+    //     cell.style.opacity = "1";
+    // } else if (lightenMode.classList.contains("pressed")) {
+    //     let lightened = lightenColor(cell);
+    //     cell.style.opacity = `${lightened}`;
+    // //     cell.style.filter = `brightness(1)`;
+    // }
 }
 
 colorSelector.addEventListener("input", (e)=>{
@@ -110,11 +122,21 @@ opt.forEach((button)=>{
                 otherButton.classList.remove("pressed");
             }
         })
-        if (colorMode.classList.contains("pressed") || rainbowMode.classList.contains("pressed") || eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed") || lightenMode.classList.contains("pressed")) {
+        if (colorMode.classList.contains("pressed") || 
+        rainbowMode.classList.contains("pressed") || 
+        eraser.classList.contains("pressed") 
+        // darkenMode.classList.contains("pressed") || 
+        // lightenMode.classList.contains("pressed")
+        ) {
             cells.forEach((cell)=>{
                 paintingEvents(cell);
             })
-        } else if (!colorMode.classList.contains("pressed") || !rainbowMode.classList.contains("pressed") || !eraser.classList.contains("pressed") || darkenMode.classList.contains("pressed") || lightenMode.classList.contains("pressed")) {
+        } else if (!colorMode.classList.contains("pressed") || 
+        !rainbowMode.classList.contains("pressed") || 
+        !eraser.classList.contains("pressed")
+        // !darkenMode.classList.contains("pressed") || 
+        // !lightenMode.classList.contains("pressed")
+        ) {
             cells.forEach((cell)=>{
                 cell.removeEventListener("mousedown", startPainting);
                 cell.removeEventListener("mouseup", stopPainting);
@@ -128,8 +150,8 @@ clear.addEventListener("click", (e)=>{
     let cells = document.querySelectorAll(".cell");
     cells.forEach((cell)=>{
         cell.style.backgroundColor = initialColor;
-        cell.style.filter = "brightness(1)";
-        cell.style.opacity = "1";
+        // cell.style.filter = "brightness(1)";
+        // cell.style.opacity = "1";
     })
 })
 
@@ -149,6 +171,7 @@ showGrid.addEventListener("click", (e)=>{
 
 
 // changing the grid size
+
 
 const grid = document.querySelector(".grid");
 const gridSize = document.getElementById("size-selector")
